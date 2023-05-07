@@ -10,6 +10,27 @@ export class App extends Component {
   //     .then(console.log);
   // }
 
+  // state = {
+  //   images: [],
+  //   largeImageURL: null,
+  //   loading: false,
+  //   error: null,
+  //   keyword: '',
+  //   page: 1,
+  //   lastPage: false,
+  // };
+
+  // onSubmintForm = query => {
+  //   this.setState({
+  //     keyword: query,
+  //     page: 1,
+  //     images: [],
+  //     lastPage: false,
+  //   });
+  // };
+
+  // onSubmintForm = query => {};
+
   render() {
     return (
       <>
