@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropType from 'prop-types';
 
-export class Searchbar extends Component {
+class Searchbar extends Component {
   state = {
     inputValue: '',
   };
@@ -11,11 +11,13 @@ export class Searchbar extends Component {
     this.setState({ [name]: value });
   };
 
-  onSubminSearchForm = e => {
-    e.prevenDefault();
+  onSubmitSearchForm = e => {
+    e.preventDefault();
+    console.log('Тють');
     const { inputValue } = this.state;
-    this.props.onSubminSearchForm(inputValue);
+    this.props.onSubmitForm(inputValue);
     this.setState({ inputValue: '' });
+    // console.log(this.props);
   };
 
   render() {
@@ -24,13 +26,12 @@ export class Searchbar extends Component {
       <header className="Searchbar">
         <form
           id="form"
-          onSubmit={this.onSubminSearchForm}
+          onSubmit={this.onSubmitSearchForm}
           className="SearchForm"
         >
           <button type="submit" className="button">
             <span className="SearchForm-button-label">Search</span>
           </button>
-
           <input
             className="SearchForm-input"
             type="text"
@@ -52,4 +53,4 @@ Searchbar.propType = {
   onSubminForm: PropType.func.isRequired,
 };
 
-// export default Searchbar;
+export default Searchbar;

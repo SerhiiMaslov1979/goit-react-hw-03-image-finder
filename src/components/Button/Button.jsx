@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Button(text, buttonAction) {
+function Button({ text, buttonAction }) {
   return (
     <div className="buttonContainer">
       <button type="button" onClick={buttonAction}>
