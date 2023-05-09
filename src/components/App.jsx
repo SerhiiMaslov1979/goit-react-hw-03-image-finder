@@ -24,10 +24,6 @@ export class App extends Component {
     if (prevState.keyword !== keyword || prevState.page !== page) {
       this.fetchImage();
     }
-
-    // if (page > 2 && prevState.page !== page) {
-    //   this.scrollDown();
-    // }
   }
 
   onSubmitForm = query => {
@@ -67,18 +63,11 @@ export class App extends Component {
     this.setState({ largeImageURL: null });
   };
 
-  // scrollDown() {
-  //   window.scrollTo({
-  //     top: document.documentElement.scrollHeight,
-  //     behavior: 'smooth',
-  //   });
-  // }
-
   render() {
     const { images, loading, error, largeImageURL, totalImages } = this.state;
-    // console.log(images.length <= 12 && images.length > 0);
+
     const showButton = !loading && images.length !== totalImages;
-    // const { images, loading, error, largeImageURL } = this.state;
+
     return (
       <>
         <Searchbar onSubmitForm={this.onSubmitForm} />
@@ -94,12 +83,6 @@ export class App extends Component {
         {showButton && (
           <Button text="Load more" buttonAction={this.onLoadMore} />
         )}
-
-        {/* {images.length > 12 && !lastPage && (
-          <Button text="Load more" buttonAction={this.fetchImage} />
-        )} */}
-
-        {/* <Button text="Load more" buttonAction={this.fetchImage} /> */}
 
         {loading && <Loader />}
         {error && <p>ERROR</p>}
