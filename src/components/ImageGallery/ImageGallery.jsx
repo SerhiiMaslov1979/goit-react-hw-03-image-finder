@@ -2,7 +2,8 @@ import PropType from 'prop-types';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 
 function ImageGallery({ images, onImageClick }) {
-  console.log(images);
+  // console.log(images);
+  // console.log('imageGallery', onImageClick);
   return (
     <ul className="ImageGallery">
       {images.map(image => (
@@ -12,7 +13,7 @@ function ImageGallery({ images, onImageClick }) {
             alt={image.tags}
             largeImageURL={image.largeImageURL}
             id={image.id}
-            // onImageClick={onImageClick}
+            onImageClick={onImageClick}
           />
         </li>
       ))}

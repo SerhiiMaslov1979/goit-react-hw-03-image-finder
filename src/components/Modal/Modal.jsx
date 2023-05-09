@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 
 class Modal extends Component {
   componentDidMount() {
+    console.log('Modal open');
     window.addEventListener('keydown', this.pressEscBtn);
   }
 
   componentWillUnmount() {
+    console.log('Modal close');
     window.removeEventListener('keydown', this.pressEscBtn);
     this.props.onCloseModal();
   }
@@ -35,34 +37,3 @@ Modal.propTypes = {
 };
 
 export default Modal;
-
-// class Modal extends Component {
-//   componentDidMount() {
-//     window.addEventListener('keydown', this.pressEscBtn);
-//   }
-
-//   componentWillUnmount() {
-//     window.removeEventListener('keydown', this.pressEscBtn);
-//   }
-
-//   pressEscBtn = event => {
-//     console.log(event);
-//     if (event.code === 'Escape') {
-//       this.props.onCloseModal();
-//     }
-//   };
-//   onOverlayClick = event => {
-//     if (event.target === event.currentTarget) this.props.onCloseModal();
-//   };
-//   render() {
-//     const { onCloseModal, children } = this.props;
-
-//     return (
-//       <div className="Overlay" onClick={this.onOverlayClick}>
-//         <div className="Modal">{children}</div>
-//       </div>
-//     );
-//   }
-// }
-
-// export default Modal;

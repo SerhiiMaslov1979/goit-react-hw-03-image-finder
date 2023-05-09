@@ -24,7 +24,7 @@ const fetchImageWithKeyword = (keyword, page) => {
       `https://pixabay.com/api/?key=${apiKey}&q=${keyword}&image_type=photo&page=${page}&per_page=12`
     )
     .then(response => {
-      console.log(response.data);
+      // console.log(response.data);
       return response.data;
     });
 };
