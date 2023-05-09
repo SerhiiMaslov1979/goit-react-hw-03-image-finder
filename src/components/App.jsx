@@ -10,24 +10,24 @@ import imageApi from '../api/api';
 export class App extends Component {
   state = {
     images: [],
+    keyword: '',
+    page: 1,
     largeImageURL: null,
     loading: false,
     error: null,
-    keyword: '',
-    page: 1,
-    lastPage: false,
+    totalImages: 0,
   };
 
   componentDidUpdate(prevProps, prevState) {
     const { keyword, page } = this.state;
 
-    if (prevState.keyword !== keyword) {
+    if (prevState.keyword !== keyword || prevState.page !== page) {
       this.fetchImage();
     }
 
-    if (page > 2 && prevState.page !== page) {
-      this.scrollDown();
-    }
+    // if (page > 2 && prevState.page !== page) {
+    //   this.scrollDown();
+    // }
   }
 
   onSubmitForm = query => {
@@ -35,8 +35,28 @@ export class App extends Component {
       keyword: query,
       page: 1,
       images: [],
-      lastPage: false,
+      totalImages: 0,
     });
+  };
+
+  onLoadMore = () => {
+    this.setState(prevState => ({
+      page: prevState.page + 1,
+    }));
+  };
+
+  fetchImage = () => {
+    const { keyword, page } = this.state;
+    this.setState({ loading: true });
+    imageApi(keyword, page)
+      .then(data => {
+        this.setState(prevState => ({
+          images: [...prevState.images, ...data.hits],
+          totalImages: data.totalHits,
+        }));
+      })
+      .catch(error => this.setState({ error }))
+      .finally(() => this.setState({ loading: false }));
   };
 
   saveLargeImage = largeImageURL => {
@@ -47,41 +67,17 @@ export class App extends Component {
     this.setState({ largeImageURL: null });
   };
 
-  isLastPage = data => {
-    // console.log(this.state.images.length);
-    // console.log(data.totalHits);
-    if (this.state.images.length === data.totalHits) {
-      this.setState({ lastPage: true });
-    }
-  };
-
-  scrollDown() {
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: 'smooth',
-    });
-  }
-
-  fetchImage = () => {
-    const { keyword, page } = this.state;
-    this.setState({ loading: true });
-    imageApi(keyword, page)
-      .then(data => {
-        this.setState(prevState => ({
-          images: [...prevState.images, ...data.hits],
-          page: prevState.page + 1,
-        }));
-
-        this.isLastPage(data);
-      })
-      .catch(error => this.setState({ error }))
-      .finally(() => this.setState({ loading: false }));
-  };
+  // scrollDown() {
+  //   window.scrollTo({
+  //     top: document.documentElement.scrollHeight,
+  //     behavior: 'smooth',
+  //   });
+  // }
 
   render() {
-    const { images, loading, error, largeImageURL, lastPage } = this.state;
+    const { images, loading, error, largeImageURL, totalImages } = this.state;
     // console.log(images.length <= 12 && images.length > 0);
-    const first = images.length >= 0 && images.length <= 12;
+    const showButton = !loading && images.length !== totalImages;
     // const { images, loading, error, largeImageURL } = this.state;
     return (
       <>
@@ -95,8 +91,8 @@ export class App extends Component {
           </Modal>
         )}
 
-        {first && !lastPage && !loading && (
-          <Button text="Load more" buttonAction={this.fetchImage} />
+        {showButton && (
+          <Button text="Load more" buttonAction={this.onLoadMore} />
         )}
 
         {/* {images.length > 12 && !lastPage && (
