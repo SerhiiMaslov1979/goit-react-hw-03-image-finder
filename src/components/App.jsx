@@ -6,6 +6,7 @@ import Loader from './Loader/Loader';
 import Modal from './Modal/Modal';
 import ModalImage from './Modal/ModalImage';
 import imageApi from '../api/api';
+import './styles.css';
 
 export class App extends Component {
   state = {
