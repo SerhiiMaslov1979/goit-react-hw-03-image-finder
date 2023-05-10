@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function Button({ text, buttonAction }) {
   return (
     <div className="buttonContainer">
-      <button type="button" onClick={buttonAction}>
+      <button type="button" className='Button' onClick={buttonAction}>
         {text}
       </button>
     </div>
