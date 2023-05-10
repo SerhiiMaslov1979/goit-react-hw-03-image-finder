@@ -8,7 +8,6 @@ function ImageGalleryItem({
   onImageClick,
 }) {
   const getlargeImageURL = e => {
-    // console.log('event target', e.target);
     onImageClick({ url: e.target.dataset.largeimageurl, alt: e.target.alt });
   };
 

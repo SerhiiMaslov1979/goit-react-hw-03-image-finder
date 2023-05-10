@@ -3,18 +3,17 @@ import PropTypes from 'prop-types';
 
 class Modal extends Component {
   componentDidMount() {
-    console.log('Modal open');
+    // console.log('Modal open');
     window.addEventListener('keydown', this.pressEscBtn);
   }
 
   componentWillUnmount() {
-    console.log('Modal close');
+    // console.log('Modal close');
     window.removeEventListener('keydown', this.pressEscBtn);
-    this.props.onCloseModal();
-  }
+   }
 
   pressEscBtn = e => {
-    console.log(e);
+    // console.log(e);
     if (e.code === 'Escape') {
       this.props.onCloseModal();
     }

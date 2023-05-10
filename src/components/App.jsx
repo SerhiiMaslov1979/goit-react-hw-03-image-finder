@@ -57,19 +57,17 @@ export class App extends Component {
   };
 
   saveLargeImage = ImageURL => {
-    // console.log('ImageURL', ImageURL);
-    this.setState({ largeImageURL: ImageURL });
+  this.setState({ largeImageURL: ImageURL });
   };
 
   hideLargeImage = () => {
-    console.log('Hide', this.state.largeImageURL);
     this.setState({ largeImageURL: null });
   };
 
   render() {
     const { images, loading, error, largeImageURL, totalImages } = this.state;
-    console.log('largeImageURL', largeImageURL);
-    console.log('TIME', Date.now());
+    // console.log('largeImageURL', largeImageURL);
+    // console.log('TIME', Date.now());
     const showButton = !loading && images.length !== totalImages;
 
     return (

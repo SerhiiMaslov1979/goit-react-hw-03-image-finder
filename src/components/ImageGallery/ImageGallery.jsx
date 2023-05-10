@@ -2,9 +2,7 @@ import PropType from 'prop-types';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 
 function ImageGallery({ images, onImageClick }) {
-  // console.log(images);
-  // console.log('imageGallery', onImageClick);
-  return (
+return (
     <ul className="ImageGallery">
       {images.map(image => (
         <li key={image.id} className="ImagegalleryItem">
